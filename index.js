@@ -23,20 +23,20 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   // // Uncomment and edit to make your own intent handler
   // // uncomment `intentMap.set('your intent name here', yourFunctionHandler);`
   // // below to get this function to be run when a Dialogflow intent is matched
-  // function yourFunctionHandler(agent) {
-  //   agent.add(`This message is from Dialogflow's Cloud Functions for Firebase inline editor!`);
-  //   agent.add(new Card({
-  //       title: `Title: this is a card title`,
-  //       imageUrl: 'https://dialogflow.com/images/api_home_laptop.svg',
-  //       text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
-  //       buttonText: 'This is a button',
-  //       buttonUrl: 'https://docs.dialogflow.com/'
-  //     })
-  //   );
-  //   agent.add(new Suggestion(`Quick Reply`));
-  //   agent.add(new Suggestion(`Suggestion`));
-  //   agent.setContext({ name: 'weather', lifespan: 2, parameters: { city: 'Rome' }});
-  // }
+   function yourFunctionHandler(agent) {
+     agent.add(`This message is from Dialogflow's Cloud Functions for Firebase inline editor!`);
+     agent.add(new Card({
+         title: `Title: this is a card title`,
+         imageUrl: 'https://dialogflow.com/images/api_home_laptop.svg',
+         text: `This is the body text of a card.  You can even use line\n  breaks and emoji! 💁`,
+         buttonText: 'This is a button',
+         buttonUrl: 'https://docs.dialogflow.com/'
+       })
+     );
+     agent.add(new Suggestion(`Quick Reply`));
+     agent.add(new Suggestion(`Suggestion`));
+     agent.setContext({ name: 'weather', lifespan: 2, parameters: { city: 'Rome' }});
+   }
 
   // // Uncomment and edit to make your own Google Assistant intent handler
   // // uncomment `intentMap.set('your intent name here', googleAssistantHandler);`
@@ -51,7 +51,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  // intentMap.set('<INTENT_NAME_HERE>', yourFunctionHandler);
+  intentMap.set('serviceIntent', yourFunctionHandler);
   // intentMap.set('<INTENT_NAME_HERE>', googleAssistantHandler);
   agent.handleRequest(intentMap);
 });

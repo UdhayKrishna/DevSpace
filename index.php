@@ -34,7 +34,7 @@ $messages=[];
           "source" => $request["result"]["source"],
           "fulfillmentText" => "Speech for response",
           "fulfillmentMessages" => $messages,
-          "contextOut" => array()
+          "outputContexts" => array()
       );
  json_encode($response);
 

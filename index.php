@@ -30,12 +30,14 @@ $messages=[];
      "textToSpeech"=> "Here is speech and additional msg for card"
     )
   );
+  
+  
   $response=array(
           "source" => $request["result"]["source"],
           "fulfillmentText" => "Speech for response",
           "fulfillmentMessages" => $messages,
           "outputContexts" => array()
       );
- json_encode($response);
+ echo json_encode($response);
 
 ?>

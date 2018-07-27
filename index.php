@@ -1,40 +1,41 @@
 <?php 
 
-$method = $_SERVER['REQUEST_METHOD'];
-
-// Process only when method is POST
-if($method == 'POST'){
-	$requestBody = file_get_contents('php://input');
-	$json = json_decode($requestBody);
-
-	$text = $json->result->parameters->text;
-
-	switch ($text) {
-		case 'hi':
-			$textToSpeech = "Hi, Nice to meet you";
-			break;
-
-		case 'bye':
-			$textToSpeech = "Bye, good night";
-			break;
-
-		case 'anything':
-			$textToSpeech = "Yes, you can type anything here.";
-			break;
-		
-		default:
-			$textToSpeech = "Hello You reached here";
-			break;
-	}
-
-	$response = new \stdClass();
-	$response->fulfillmentText = $textToSpeech;
-	$response->source = "webhook";
-	echo json_encode($response);
-}
-else
-{
-	echo "Method not allowed";
-}
+$request== file_get_contents("php://input");
+$messages=[];
+// Building Card
+ array_push($messages, array(
+    "type"=> "basic_card",
+    "platform"=> "google",
+    "title"=> "Card title",
+    "subtitle"=> "card subtitle",
+    "image"=>[
+      "url"=>'https://www.apkmirror.com/wp-content/uploads/2016/07/577db70aecc56-384x384.png',
+      "accessibility_text"=>'Mint'
+      ],
+      "formattedText"=> 'Text for card',
+      "buttons"=> [
+        [
+          "title"=> "Help",
+          "openUrlAction"=> [
+            "url"=> "https://help.mint.com/"
+            ]
+          ]
+        ]
+      )
+   );
+  // Adding simple response (mandatory)
+  array_push($messages, array(
+     "type"=> "simple_response",
+     "platform"=> "google",
+     "textToSpeech"=> "Here is speech and additional msg for card"
+    )
+  );
+  $response=array(
+          "source" => $request["result"]["source"],
+          "speech" => "Speech for response",
+          "messages" => $messages,
+          "contextOut" => array()
+      );
+ json_encode($response);
 
 ?>

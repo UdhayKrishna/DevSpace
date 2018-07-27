@@ -32,8 +32,8 @@ $messages=[];
   );
   $response=array(
           "source" => $request["result"]["source"],
-          "speech" => "Speech for response",
-          "messages" => $messages,
+          "fulfillmentText" => "Speech for response",
+          "fulfillmentMessages" => $messages,
           "contextOut" => array()
       );
  json_encode($response);
